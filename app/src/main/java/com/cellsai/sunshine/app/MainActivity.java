@@ -1,15 +1,18 @@
 package com.cellsai.sunshine.app;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -23,6 +26,7 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+
     }
 
 
@@ -59,7 +63,21 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+            ArrayList fakeData = new ArrayList(Arrays.asList("Today - Sunny 88/63", "Tomorrow Foggy 70/46",
+            "Weds - cloudy 72/63", "Thurs Rainy", "Fri Foggy", "Sat Sunny"
+            ));
+
+            ArrayAdapter<String> fakeAdapter = new ArrayAdapter<String>(getActivity(), R.layout.list_ltem_forecast,R.id.list_item_forecast_textview,fakeData);
+
+
+
+
+           ListView tempView = (ListView)rootView.findViewById(R.id.listview_forecast);
+            tempView.setAdapter(fakeAdapter);
+
             return rootView;
         }
     }
